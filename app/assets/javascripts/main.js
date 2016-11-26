@@ -11,11 +11,11 @@ $(function(){
     let htmlString = "";
 
     data["Search"].forEach(function(movie){
-    htmlString += `<div class="col-xs-12 col-md-4">
-                    <img src=${movie["Poster"]} />
-                    <p>${movie["Title"]}</p>
-                    <p>${movie["Year"]}</p>
-                   </div>`;
+      htmlString += `<div class="col-xs-12 col-md-4">
+                      <img src=${movie["Poster"]} />
+                      <p>${movie["Title"]}</p>
+                      <p>${movie["Year"]}</p>
+                    </div>`;
     });
 
     $("#movies").append(htmlString);
