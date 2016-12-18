@@ -22,10 +22,13 @@ $(function(){
     } else {
       data["Search"].forEach(function(movie){
         let moviePoster = movie["Poster"] == "N/A" ? "/assets/poster.jpg" : movie["Poster"];
-        htmlString += `<div class="col-xs-12 col-md-4 text-center">
-                      <img src=${moviePoster} data-id="${movie['imdbID']}"/>
-                      <p>${movie["Title"]}</p>
-                      <p>${movie["Year"]}</p>
+        htmlString += `
+                    <div class="col-xs-12 col-md-4 text-center">
+                      <div class="col-xs-12">
+                        <img src=${moviePoster} data-id="${movie['imdbID']}"/>
+                      </div>
+                      <div class="col-xs-12">${movie["Title"]}</div>
+                      <div class="col-xs-12">${movie["Year"]}</div>
                     </div>`;
       });
     }
