@@ -1,23 +1,75 @@
 $(function(){
-  $.ajax({
-    url: 'http://www.omdbapi.com/?',
-    data: {"s": "batman"}
-  })
-  .done(function(data){
-    displayMovies(data);
+  let form = $('#movie-search');
+  form.submit(function(e){
+    e.preventDefault();
+    $.ajax({
+      url: 'http://www.omdbapi.com/?',
+      data: form.serialize()
+    })
+    .done(function(data){
+      displayMovies(data);
+    });
   });
 
   function displayMovies(data){
+    let container = $("#movies");
     let htmlString = "";
 
-    data["Search"].forEach(function(movie){
-      htmlString += `<div class="col-xs-12 col-md-4">
-                      <img src=${movie["Poster"]} />
+    container.empty();
+
+    if (data["Response"] == "False") {
+      htmlString = `<div class="alert alert-danger text-center" role="alert">${data["Error"]}</div>`
+    } else {
+      data["Search"].forEach(function(movie){
+        let moviePoster = movie["Poster"] == "N/A" ? "/assets/poster.jpg" : movie["Poster"];
+        htmlString += `<div class="col-xs-12 col-md-4">
+                      <img src=${moviePoster} data-id="${movie['imdbID']}"/>
                       <p>${movie["Title"]}</p>
                       <p>${movie["Year"]}</p>
                     </div>`;
-    });
+      });
+    }
 
-    $("#movies").append(htmlString);
+    container.append(htmlString);
   }
+
+  $('#movies').on('click', 'img', function(e){
+    e.preventDefault();
+
+     let id = $(e.target).data('id');
+
+    $.ajax({
+      url: `http://www.omdbapi.com/?`,
+      data: {i: id}
+    })
+    .done(function(data){
+      displayMovie(data);
+    })
+  });
+
+  function displayMovie(data){
+    let container = $("#movies")
+    let htmlString = "";
+    container.empty();
+
+    let moviePoster = data["Poster"] == "N/A" ? "/assets/poster.jpg" : data["Poster"]
+    htmlString += `<div class="col-md-4 col-xs-12"></div>
+     <div class="col-md-4 col-xs-12">
+       <img style="width:100px" src=${moviePoster} />
+       <p>Title :  ${data["Title"]}</p>
+       <p>Year:  ${data["Year"]}</p>
+       <p> ${data["Plot"]}</p>
+       <p>Released : ${data["Released"]}</p>
+       <p>Runtime : ${data["Runtime"]}</p>
+       <p>Genre : ${data["Genre"]}</p>
+       <p>Director : ${data["Director"]}</p>
+       <p>Writter : ${data["Writer"]}</p>
+       <p>Actors : ${data["Actors"]}</p>
+       <p>Language : ${data["Language"]}</p>
+       <p>Country : ${data["Country"]}</p>
+       <p>Awards : ${data["Awards"]}</p>
+     </div>
+     <div class="col-md-4 col-xs-12"></div>`
+    container.append(htmlString);
+}
 });
