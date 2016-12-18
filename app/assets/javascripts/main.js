@@ -69,8 +69,9 @@ $(function(){
        <p>Country : ${data["Country"]}</p>
        <p>Awards : ${data["Awards"]}</p>
        <form id="rating-form" action="/reviews" method="POST">
-         <input type="hidden" name="imdbid" value=${movie["imdbID"]} />
-         <textarea name= "review[comment]" class="form-control" placeholder="Your movie review"/>
+         <input type="hidden" name="authenticity_token" value=${window._token} />
+         <input type="hidden" name="imdbid" value=${data["imdbID"]} />
+         <textarea name= "review[comment]" class="form-control" placeholder="Your review in 140 characters"/>
          <br />
          <input type="submit" class="btn btn-success pull-right" />
        </form>
