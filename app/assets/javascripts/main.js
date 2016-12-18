@@ -22,7 +22,7 @@ $(function(){
     } else {
       data["Search"].forEach(function(movie){
         let moviePoster = movie["Poster"] == "N/A" ? "/assets/poster.jpg" : movie["Poster"];
-        htmlString += `<div class="col-xs-12 col-md-4">
+        htmlString += `<div class="col-xs-12 col-md-4 text-center">
                       <img src=${moviePoster} data-id="${movie['imdbID']}"/>
                       <p>${movie["Title"]}</p>
                       <p>${movie["Year"]}</p>
@@ -53,21 +53,26 @@ $(function(){
     container.empty();
 
     let moviePoster = data["Poster"] == "N/A" ? "/assets/poster.jpg" : data["Poster"]
-    htmlString += `<div class="col-md-4 col-xs-12"></div>
+    htmlString += `<div class="col-md-4 col-xs-12 text-center">
+       <img src=${moviePoster} />
+     </div>
      <div class="col-md-4 col-xs-12">
-       <img style="width:100px" src=${moviePoster} />
-       <p>Title :  ${data["Title"]}</p>
-       <p>Year:  ${data["Year"]}</p>
-       <p> ${data["Plot"]}</p>
-       <p>Released : ${data["Released"]}</p>
-       <p>Runtime : ${data["Runtime"]}</p>
-       <p>Genre : ${data["Genre"]}</p>
-       <p>Director : ${data["Director"]}</p>
-       <p>Writter : ${data["Writer"]}</p>
-       <p>Actors : ${data["Actors"]}</p>
-       <p>Language : ${data["Language"]}</p>
-       <p>Country : ${data["Country"]}</p>
-       <p>Awards : ${data["Awards"]}</p>
+       <div class="col-xs-12"><h2><strong>${data["Title"]}</strong></h2></div>
+
+       <div class="col-xs-12"><strong>Year: </strong>${data["Year"]}</div>
+       <div class="col-xs-12"><strong>Released: </strong>${data["Released"]}</div>
+       <div class="col-xs-12"><strong>Runtime: </strong>${data["Runtime"]}</div>
+       <div class="col-xs-12"><strong>Genre: </strong>${data["Genre"]}</div>
+       <div class="col-xs-12"><strong>Director: </strong>${data["Director"]}</div>
+       <div class="col-xs-12"><strong>Writer: </strong>${data["Writer"]}</div>
+       <div class="col-xs-12"><strong>Actors: </strong>${data["Actors"]}</div>
+       <div class="col-xs-12"><strong>Plot: </strong>${data["Plot"]}</div>
+       <div class="col-xs-12"><strong>Language: </strong>${data["Language"]}</div>
+       <div class="col-xs-12"><strong>Country: </strong>${data["Country"]}</div>
+       <div class="col-xs-12"><strong>Awards: </strong>${data["Awards"]}</div>
+     </div>
+     <div class="col-md-4 col-xs-12">
+       <h2>Create a Review</h2>
        <form id="rating-form" action="/reviews" method="POST">
          <input type="hidden" name="authenticity_token" value=${window._token} />
          <input type="hidden" name="imdbid" value=${data["imdbID"]} />
@@ -75,8 +80,7 @@ $(function(){
          <br />
          <input type="submit" class="btn btn-success pull-right" />
        </form>
-     </div>
-     <div class="col-md-4 col-xs-12"></div>`
+     </div>`
     container.append(htmlString);
 }
 });
