@@ -1,7 +1,7 @@
 $(function(){
   $.ajax({
     url: 'http://www.omdbapi.com/?',
-    data: {"s": "superman"}
+    data: {"s": "batman"}
   })
   .done(function(data){
     displayMovies(data);
