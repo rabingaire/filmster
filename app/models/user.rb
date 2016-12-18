@@ -6,4 +6,8 @@ class User < ApplicationRecord
   mount_uploader :photo, PhotoUploader
 
   has_many :reviews
+
+  def reviewed?(movie)
+    return unless self.reviews.find_by(movie_id: movie.id)
+  end
 end

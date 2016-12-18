@@ -36,5 +36,19 @@
         </div>
       </div>
     <% end %>
+
+    <% if user_signed_in? && current_user.reviewed?(@movie) %>
+      <div class="col-xs-12">
+        <h2>Post a review</h2>
+        <form id="rating-form" action="/reviews" method="POST">
+          <input type="hidden" name="authenticity_token" value=`${window._token}` />
+          <input type="hidden" name="imdbid" value="<%= @movie.imdbid %>"/>
+          <textarea name= "review[comment]" class="form-control" placeholder="Your review on 140 words..">
+          </textarea>
+          <br />
+          <input type="submit" class="btn btn-success pull-right" />
+        </form>
+      </div>
+    <% end %>
   </div>
 </div>
