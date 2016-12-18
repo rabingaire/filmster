@@ -1,5 +1,5 @@
 class MoviesController < ApplicationController
   def show
-    @movie = Movie.find(params[:id])
+    @movie = Movie.includes(:reviews, reviews: :user).find(params[:id])
   end
 end
