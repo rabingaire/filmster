@@ -25,7 +25,7 @@ $(function(){
         htmlString += `
                     <div class="col-xs-12 col-md-4 text-center">
                       <div class="col-xs-12">
-                        <img src=${moviePoster} data-id="${movie['imdbID']}"/>
+                        <img src=${moviePoster} data-id="${movie['imdbID']}" height="350" width="300"/>
                       </div>
                       <div class="col-xs-12">${movie["Title"]}</div>
                       <div class="col-xs-12">${movie["Year"]}</div>
