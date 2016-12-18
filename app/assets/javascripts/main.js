@@ -68,6 +68,12 @@ $(function(){
        <p>Language : ${data["Language"]}</p>
        <p>Country : ${data["Country"]}</p>
        <p>Awards : ${data["Awards"]}</p>
+       <form id="rating-form" action="/reviews" method="POST">
+         <input type="hidden" name="imdbid" value=${movie["imdbID"]} />
+         <textarea name= "review[comment]" class="form-control" placeholder="Your movie review"/>
+         <br />
+         <input type="submit" class="btn btn-success pull-right" />
+       </form>
      </div>
      <div class="col-md-4 col-xs-12"></div>`
     container.append(htmlString);
