@@ -3,7 +3,7 @@ $(function(){
   form.submit(function(e){
     e.preventDefault();
     $.ajax({
-      url: 'https://www.omdbapi.com/?',
+      url: 'https://omdbapi.com/?',
       data: form.serialize()
     })
     .done(function(data){
@@ -42,7 +42,7 @@ $(function(){
      let id = $(e.target).data('id');
 
     $.ajax({
-      url: `https://www.omdbapi.com/?`,
+      url: `https://omdbapi.com/?`,
       data: {i: id}
     })
     .done(function(data){
